@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>CLIENT_ID</key>
+		<string>862377076819-fl8147aqoo96s8q00sds7obnphnf6tk0.apps.googleusercontent.com</string>
+		<key>REVERSED_CLIENT_ID</key>
+		<string>com.googleusercontent.apps.862377076819-fl8147aqoo96s8q00sds7obnphnf6tk0</string>
+		<key>API_KEY</key>
+		<string>AIzaSyDBFckw0KOaFq7ojO3P5UveDggsp53gJrs</string>
+		<key>GCM_SENDER_ID</key>
+		<string>862377076819</string>
+		<key>PLIST_VERSION</key>
+		<string>1</string>
+		<key>BUNDLE_ID</key>
+		<string>com.example.freeKash</string>
+		<key>PROJECT_ID</key>
+		<string>free-kash</string>
+		<key>STORAGE_BUCKET</key>
+		<string>free-kash.appspot.com</string>
+		<key>IS_ADS_ENABLED</key>
+		<false></false>
+		<key>IS_ANALYTICS_ENABLED</key>
+		<false></false>
+		<key>IS_APPINVITE_ENABLED</key>
+		<true></true>
+		<key>IS_GCM_ENABLED</key>
+		<true></true>
+		<key>IS_SIGNIN_ENABLED</key>
+		<true></true>
+		<key>GOOGLE_APP_ID</key>
+		<string>1:862377076819:ios:4f21c90a31f5c633dcfea6</string>
+	</dict>
+</plist>

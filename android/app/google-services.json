@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "862377076819",
+    "project_id": "free-kash",
+    "storage_bucket": "free-kash.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862377076819:android:99c7f86a3a6db1a0dcfea6",
+        "android_client_info": {
+          "package_name": "com.example.free_kash"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0YY3LtskkZ5bCeX9dPV50Q0I4y-hgFb4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

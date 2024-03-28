@@ -60,8 +60,11 @@ class ReadexProText extends StatelessWidget {
   // Additional text style to apply
   final TextStyle? textStyle;
 
+  final TextAlign? textAlign;
+
   const ReadexProText({
     super.key,
+    this.textAlign,
     this.fontSize,
     this.fontWeight,
     this.color,
@@ -88,6 +91,7 @@ class ReadexProText extends StatelessWidget {
     // Return a Text widget styled with Google Fonts
     return Text(
       data,
+      textAlign: textAlign,
       style: GoogleFonts.readexPro(
         fontSize: fontSize,
         fontWeight: fontWeight,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// A utility class for defining a color palette used throughout the application.
-class ColorPalette {
+class Palette {
   /// Primary color used for main elements and accents.
   static Color primary = const Color(0xff2F66F6);
 

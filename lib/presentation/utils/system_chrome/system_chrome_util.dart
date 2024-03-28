@@ -25,6 +25,8 @@ class SystemChromeConfig {
       SystemUiOverlay.top,
       SystemUiOverlay.bottom,
     ]);
+
+    setStatusBarColor();
   }
 
   /// Sets the status bar color to transparent with dark icons.

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:free_kash/presentation/presentations.dart';
+import 'package:free_kash/presentation/routes/go_router/route_name.dart';
 import 'package:free_kash/presentation/utils/utils.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -18,20 +20,24 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     super.initState();
 
     Future.delayed(
-      const Duration(seconds: 4),
-      () {},
+      const Duration(seconds: 2),
+      () {
+        context.pushReplacementNamed(RouteName.authGateway);
+
+        SystemChromeConfig.toggleOff();
+      },
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorPalette.primary,
+      backgroundColor: Palette.primary,
       body: Center(
         child: ReadexProText(
           data: 'FreeKash',
           fontWeight: FontWeight.bold,
-          color: ColorPalette.background,
+          color: Palette.background,
           fontSize: 22.sp,
         ),
       ),

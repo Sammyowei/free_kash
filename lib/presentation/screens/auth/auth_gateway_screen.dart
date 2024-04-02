@@ -28,9 +28,10 @@ class _AuthGatewayScreenState extends State<AuthGatewayScreen> {
 
             context.pushReplacementNamed(RouteName.auth);
           } else {
-            debugPrint('User is signed in!');
+            debugPrint('User is signed in!   ${user.uid}');
 
-            context.pushReplacementNamed(RouteName.dashboard);
+            context.pushReplacementNamed(RouteName.dashboard,
+                pathParameters: {'id': user.uid});
           }
         }),
       );

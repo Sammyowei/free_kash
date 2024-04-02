@@ -2,10 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:free_kash/data/auth/auth.dart';
 import 'package:free_kash/presentation/presentations.dart';
 import 'package:free_kash/presentation/routes/go_router/route_name.dart';
-import 'package:free_kash/presentation/utils/color_palette/color_palette.dart';
-import 'package:free_kash/presentation/utils/utils.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
@@ -66,22 +65,32 @@ class BodyWithButton extends StatelessWidget {
             SocialSignInButton(
               radius: 10,
               size: Size(MediaQuery.sizeOf(context).width, 55),
+              imagePath: ImageAsset.facebook,
               description: 'Continue with Facebook',
-              onTap: () {
+              onTap: () async {
+                await AuthClient()
+                    .loginWithFederatedProvider(FederatedAuthProvider.facebook);
                 debugPrint('Hello World');
               },
             ),
             Gap(10.h),
             SocialSignInButton(
               radius: 10,
+              imagePath: ImageAsset.google,
               size: Size(MediaQuery.sizeOf(context).width, 55),
               description: 'Continue with Google',
+              onTap: () async {
+                await AuthClient()
+                    .loginWithFederatedProvider(FederatedAuthProvider.google);
+                debugPrint('Hello World');
+              },
             ),
             Gap(10.h),
             (!Platform.isIOS)
                 ? Container()
                 : SocialSignInButton(
                     radius: 10,
+                    imagePath: ImageAsset.apple,
                     size: Size(MediaQuery.sizeOf(context).width, 55),
                     description: 'Continue with Apple',
                   ),

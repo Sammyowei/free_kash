@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:free_kash/presentation/presentations.dart';
-import 'package:free_kash/presentation/utils/color_palette/color_palette.dart';
 import 'package:gap/gap.dart';
 
 class SocialSignInButton extends StatelessWidget {
@@ -52,7 +51,6 @@ class SocialSignInButton extends StatelessWidget {
                       : Image.asset(
                           imagePath!,
                           height: (size.height * 0.4).h,
-                          width: (size.width * 0.4).w,
                         ),
                   Gap(10.w),
                   ReadexProText(

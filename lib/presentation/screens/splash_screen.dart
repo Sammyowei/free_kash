@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:free_kash/presentation/presentations.dart';
 import 'package:free_kash/presentation/routes/go_router/route_name.dart';
-import 'package:free_kash/presentation/utils/utils.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';

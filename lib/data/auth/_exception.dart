@@ -25,6 +25,7 @@ class AuthException implements Exception {
         message = 'Email already in use.';
         break;
       default:
+        print(e.code);
         message = e.message ?? 'An error occurred during authentication.';
         break;
     }

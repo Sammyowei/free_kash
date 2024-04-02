@@ -7,6 +7,8 @@ class CustomButton extends StatelessWidget {
 
   final Color? color;
 
+  final Widget? widget;
+
   final Color? outlineColor;
 
   final String? description;
@@ -16,6 +18,7 @@ class CustomButton extends StatelessWidget {
 
   const CustomButton(
       {super.key,
+      this.widget,
       this.color,
       this.textColor,
       this.description,
@@ -39,12 +42,13 @@ class CustomButton extends StatelessWidget {
             ),
             color: color),
         child: Center(
-          child: ReadexProText(
-            data: description ?? 'Hell Nah',
-            color: textColor,
-            fontWeight: FontWeight.w600,
-            fontSize: 16.sp,
-          ),
+          child: widget ??
+              ReadexProText(
+                data: description ?? 'Hell Nah',
+                color: textColor,
+                fontWeight: FontWeight.w600,
+                fontSize: 16.sp,
+              ),
         ),
       ),
     );

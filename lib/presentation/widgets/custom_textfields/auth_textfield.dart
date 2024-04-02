@@ -12,15 +12,24 @@ class AuthTextField extends StatelessWidget {
 
   final String? Function(String? value)? _validator;
 
+  final bool obscureText;
+
   final String labelDescription;
 
+  final Widget? sulfixIcon;
+
   final void Function(String value)? _onChanged;
+
+  final FocusNode? focusNode;
   const AuthTextField(
       {super.key,
+      this.obscureText = false,
+      this.sulfixIcon,
       this.prefixIcon,
       this.labelDescription = 'Email address',
       Validaor validator,
       TextEditingController? controller,
+      this.focusNode,
       void Function(String value)? onChanged})
       : _controller = controller,
         _validator = validator,
@@ -29,59 +38,63 @@ class AuthTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 48.h,
       child: TextFormField(
         controller: _controller,
-        onChanged: (_onChanged == null) ? null : (value) => _onChanged(value),
+        onChanged: _onChanged,
+        obscureText: obscureText,
         decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10).r,
-              borderSide: BorderSide(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10).r,
+            borderSide: BorderSide(
+              color: Palette.primary,
+              width: 1,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10).r,
+            borderSide: BorderSide(
+              color: Palette.primary,
+              width: 1,
+            ),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10).r,
+            borderSide: BorderSide(
+              color: Palette.primary,
+              width: 1,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10).r,
+            borderSide: BorderSide(
+              color: Palette.primary,
+              width: 1,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10).r,
+            borderSide: BorderSide(
+              color: Palette.primary,
+              width: 1,
+            ),
+          ),
+          prefixIcon: prefixIcon ??
+              Icon(
+                Icons.mail_outline_outlined,
                 color: Palette.primary,
-                width: 1,
+                size: 18.h,
               ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10).r,
-              borderSide: BorderSide(
-                color: Palette.primary,
-                width: 1,
-              ),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10).r,
-              borderSide: BorderSide(
-                color: Palette.primary,
-                width: 1,
-              ),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10).r,
-              borderSide: BorderSide(
-                color: Palette.primary,
-                width: 1,
-              ),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10).r,
-              borderSide: BorderSide(
-                color: Palette.primary,
-                width: 1,
-              ),
-            ),
-            prefixIcon: prefixIcon ??
-                Icon(
-                  Icons.mail_outline_outlined,
-                  color: Palette.primary,
-                  size: 18.h,
-                ),
-            label: ReadexProText(
-              data: labelDescription,
-              color: Palette.secondary,
-              fontSize: 12.sp,
-            ),
-            fillColor: Palette.surface,
-            filled: true),
+          suffixIcon: sulfixIcon,
+          label: ReadexProText(
+            data: labelDescription,
+            color: Palette.secondary,
+            fontSize: 12.sp,
+          ),
+          fillColor: Palette.surface,
+          filled: true,
+        ),
+        cursorColor: Palette.primary,
+        focusNode: focusNode,
         validator: (_validator == null) ? null : (value) => _validator(value),
       ),
     );

@@ -12,6 +12,15 @@ class RoutePath {
   /// Route path for the signup screen.
   static String signup = '/auth/signup';
 
+  /// Route Path for the account creation screen.
+  static const String accountCreation = '/auth/signup/accountCreation';
+
+  /// Route Path for the forgot password screen.
+  static const String forgotPassword = '/auth/forgotPassword';
+
+  /// Route Name for the confirmation screen after the password reset link has been sent.
+  static const String confirmation = '/auth/forgotPassword/confirlmation';
+
   /// Route path for the signin screen.
   static String signIn = '/auth/signin';
 

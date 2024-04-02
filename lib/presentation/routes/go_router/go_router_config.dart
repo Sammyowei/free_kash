@@ -1,5 +1,6 @@
 import 'package:free_kash/presentation/routes/go_router/route_name.dart';
 import 'package:free_kash/presentation/routes/go_router/route_path.dart';
+import 'package:free_kash/presentation/screens/auth/forgot_password/confirmation_screen.dart';
 import 'package:free_kash/presentation/screens/screens.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,6 +27,35 @@ class NavRouter {
         path: RoutePath.signup,
         name: RouteName.signup,
         builder: (context, state) => const SignUpScreen(),
+      ),
+      GoRoute(
+        path: RoutePath.accountCreation,
+        name: RouteName.accountCreation,
+        builder: (context, state) => const AccountCreationScreen(),
+      ),
+      GoRoute(
+        path: RoutePath.forgotPassword,
+        name: RouteName.forgotPassword,
+        builder: (context, state) => const ForgotPasswordScreen(),
+      ),
+      GoRoute(
+        path: RoutePath.confirmation,
+        name: RouteName.confirmation,
+        builder: (context, state) {
+          var param = state.uri.queryParameters;
+
+          String email = 'test@user.com';
+
+          final paramEmail = param['email'];
+
+          if (paramEmail != null) {
+            email = paramEmail;
+          }
+
+          return ForgetPasswordConfirmationScreen(
+            email: email,
+          );
+        },
       ),
       GoRoute(
         path: RoutePath.signIn,

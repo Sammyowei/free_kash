@@ -15,6 +15,15 @@ class RouteName {
   /// Route name for the signin screen.
   static const String signIn = 'signIn';
 
+  /// Route name for the account creation screen.
+  static const String accountCreation = 'accountCreation';
+
+  /// Route name for the forgot password screen.
+  static const String forgotPassword = 'forgotPassword';
+
+  /// Route Name for the confirmation screen after the password reset link has been sent.
+  static const String confirmation = 'confirlmation';
+
   /// Route name for the onboarding screen.
   static const String onboarding = 'onboarding';
 

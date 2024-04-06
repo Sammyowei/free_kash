@@ -25,8 +25,13 @@ class DbConfig extends DB {
   /// [data]: The data to be stored in the database.
   /// [path]: The path at which the data should be stored.
   Future<void> create(data, String path) async {
+    final db = _instance.databaseURL =
+        'https://free-kash-default-rtdb.europe-west1.firebasedatabase.app';
+
+    print(_instance.databaseURL);
     final dbPath = '$dbStore/$path';
-    final ref = _instance.ref(dbPath);
+    print(data);
+    final ref = _instance.refFromURL("$db/$dbPath");
     return await ref.set(data);
   }
 

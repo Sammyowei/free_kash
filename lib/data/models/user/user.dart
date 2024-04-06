@@ -1,18 +1,20 @@
+// ignore_for_file: avoid_init_to_null
+
 import '../models.dart'; // Importing models.dart file which contains necessary classes/interfaces
 
 class User {
   // A class representing a user
 
   User({
-    required this.firstName, // The first name of the user
-    required this.lastName, // The last name of the user
-    this.middleName, // The middle name of the user (optional)
-    required this.emailAddress, // The email address of the user
-    required this.referralCode, // The referral code of the user
-    required this.isReferred, // Indicates whether the user was referred
-    required this.mobileNumber, // The mobile number of the user
-    required this.wallet, // The wallet of the user
-    this.credentials, // The credentials of the user (optional)
+    this.firstName = null, // The first name of the user
+    this.lastName = null, // The last name of the user
+    this.middleName = null, // The middle name of the user (optional)
+    this.emailAddress = null, // The email address of the user
+    this.referralCode = null, // The referral code of the user
+    this.isReferred = false, // Indicates whether the user was referred
+    this.mobileNumber = null, // The mobile number of the user
+    this.wallet = null, // The wallet of the user
+    this.credentials = null, // The credentials of the user (optional)
     this.rewardHistory =
         const [], // The reward history of the user (default to empty list)
     this.withdrawalHistory =
@@ -26,22 +28,21 @@ class User {
             DateTime
                 .now(); // If updatedAt is null, set it to the current timestamp
 
-  final String firstName; // The first name of the user
-  final String lastName; // The last name of the user
-  final String? middleName; // The middle name of the user (optional)
-  final String emailAddress; // The email address of the user
-  final String referralCode; // The referral code of the user
-  final bool isReferred; // Indicates whether the user was referred
-  final String mobileNumber; // The mobile number of the user
+  String? firstName; // The first name of the user
+  String? lastName; // The last name of the user
+  String? middleName; // The middle name of the user (optional)
+  String? emailAddress; // The email address of the user
+  String? referralCode; // The referral code of the user
+  bool? isReferred; // Indicates whether the user was referred
+  String? mobileNumber; // The mobile number of the user
 
-  final Wallet wallet; // The wallet of the user
-  final Credentials? credentials; // The credentials of the user (optional)
-  final List<Reward> rewardHistory; // The reward history of the user
-  final List<Withdrawal>
-      withdrawalHistory; // The withdrawal history of the user
+  Wallet? wallet; // The wallet of the user
+  Credentials? credentials; // The credentials of the user (optional)
+  List<Reward> rewardHistory; // The reward history of the user
+  List<Withdrawal> withdrawalHistory; // The withdrawal history of the user
 
-  final DateTime createdAt; // The creation timestamp of the user
-  final DateTime updatedAt; // The last update timestamp of the user
+  DateTime? createdAt; // The creation timestamp of the user
+  DateTime? updatedAt; // The last update timestamp of the user
 
   // Method to convert User object to JSON
   Map<String, dynamic> toJson() {
@@ -53,14 +54,26 @@ class User {
       'referral_code': referralCode,
       'is_referred': isReferred,
       'mobile_number': mobileNumber,
-      'wallet': wallet.toJson(),
+      'wallet': wallet?.toJson(),
       'credentials': credentials?.toJson(),
       'reward_history': rewardHistory.map((reward) => reward.toJson()).toList(),
       'withdrawal_history':
           withdrawalHistory.map((withdrawal) => withdrawal.toJson()).toList(),
-      'created_at': createdAt.toIso8601String(),
-      'updated_at': updatedAt.toIso8601String(),
+      'created_at': createdAt!.toIso8601String(),
+      'updated_at': updatedAt!.toIso8601String(),
     };
+  }
+
+  void addReward(double amount) {
+    wallet?.addToBalance(amount);
+  }
+
+  void addRewardToHistory(Reward reward) {
+    rewardHistory.add(reward);
+  }
+
+  void withdraw(double amount) {
+    wallet?.withdrawFromBalance(amount);
   }
 
   // Factory method to create a User object from JSON data
@@ -90,23 +103,28 @@ class User {
     );
   }
 
-  // Static method to create a copy of a User object
-  static User copyWith(
-    User user, {
-    String? firstName,
-    String? lastName,
-    String? middleName,
-    String? emailAddress,
-    String? referralCode,
-    bool? isReferred,
-    String? mobileNumber,
-    Wallet? wallet,
-    Credentials? credentials,
-    List<Reward>? rewardHistory,
-    List<Withdrawal>? withdrawalHistory,
-    DateTime? createdAt,
-    DateTime? updatedAt,
+  void addUserDetails({
+    required String mobileNumbers,
+    required String firstNames,
+    required String lastNames,
+    String? middleNames,
   }) {
+    firstName = firstNames;
+    lastName = lastNames;
+    middleName = middleNames;
+    mobileNumber = mobileNumbers;
+  }
+
+  void addEmail(String email) {
+    emailAddress = email;
+  }
+
+  void addCredentials(Credentials credential) {
+    credentials = Credentials.copyWith(credential);
+  }
+
+  // Static method to create a copy of a User object
+  static User copyWith(User user) {
     return User(
       firstName: user.firstName,
       lastName: user.lastName,

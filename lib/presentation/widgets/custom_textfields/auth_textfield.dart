@@ -18,11 +18,14 @@ class AuthTextField extends StatelessWidget {
 
   final Widget? sulfixIcon;
 
+  final bool isEnabled;
+
   final void Function(String value)? _onChanged;
 
   final FocusNode? focusNode;
   const AuthTextField(
       {super.key,
+      this.isEnabled = true,
       this.obscureText = false,
       this.sulfixIcon,
       this.prefixIcon,
@@ -43,6 +46,7 @@ class AuthTextField extends StatelessWidget {
         onChanged: _onChanged,
         obscureText: obscureText,
         decoration: InputDecoration(
+          enabled: isEnabled,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10).r,
             borderSide: BorderSide(

@@ -63,6 +63,13 @@ class NavRouter {
         builder: (context, state) => const SignInScreen(),
       ),
       GoRoute(
+        path: RoutePath.onboarding,
+        name: RouteName.onboarding,
+        builder: (context, state) {
+          return const OnboardingScreen();
+        },
+      ),
+      GoRoute(
         path: RoutePath.dashboard,
         name: RouteName.dashboard,
         builder: (context, state) {

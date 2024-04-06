@@ -37,7 +37,7 @@ class Wallet {
   }
 
   // Method to add an amount to the total withdrawal
-  void addToWithdrawal(double amount) {
+  void withdrawFromBalance(double amount) {
     totalWithdrawal += amount;
   }
 

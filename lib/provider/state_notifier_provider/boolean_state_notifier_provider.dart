@@ -33,3 +33,13 @@ final signupFormValidatorProvider =
     StateNotifierProvider<BooleanStateNotifier, bool>((ref) {
   return BooleanStateNotifier();
 });
+
+final profileStateNotifierProvider =
+    StateNotifierProvider<BooleanStateNotifier, bool>((ref) {
+  return BooleanStateNotifier();
+});
+
+final bankValidatorStateNotifierProvider =
+    StateNotifierProvider<BooleanStateNotifier, bool>((ref) {
+  return BooleanStateNotifier();
+});

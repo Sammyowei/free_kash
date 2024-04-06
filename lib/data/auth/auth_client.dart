@@ -5,21 +5,27 @@ import 'package:free_kash/data/auth/_auh_provider.dart';
 import 'package:free_kash/data/auth/_auth.dart';
 import 'package:free_kash/data/auth/_exception.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 import '_auth_response.dart';
 
+/// A class implementing authentication operations using Firebase Authentication.
 class AuthClient extends Auth {
   static final _authInstance = FirebaseAuth.instance;
+
+  String? get userID => _authInstance.currentUser?.uid;
+
+  /// Checks if a user is currently logged in.
   @override
   Future<bool> isLoggedIn() async {
     return _authInstance.currentUser == null ? false : true;
   }
 
+  /// Logs in a user with email and password.
+  /// Returns an [AuthResponse] indicating the result of the operation.
   @override
   Future<AuthResponse> loginWithEmailPassword(
       String email, String password) async {
     try {
-      final user = await _authInstance.signInWithEmailAndPassword(
+      await _authInstance.signInWithEmailAndPassword(
           email: email, password: password);
 
       return SuccessAuthResponse(message: 'Login Successfully.');
@@ -28,94 +34,72 @@ class AuthClient extends Auth {
         AuthException customException =
             AuthException.fromFirebaseAuthException(e);
         debugPrint('Authentication Exception: ${customException.message}');
-        // Handle the exception, for example, show an error message to the user
-
         return ErrorAuthResponse(customException.message, customException.code);
       } else {
         debugPrint('Unexpected error occurred: $e');
-        // Handle other types of exceptions here if needed
-
-        return ErrorAuthResponse('Unexpected error occurred: $e', 'unckown');
+        return ErrorAuthResponse('Unexpected error occurred: $e', 'unknown');
       }
     }
-    // throw UnimplementedError();
   }
 
+  /// Logs in a user with a federated provider (e.g., Google, Facebook).
   @override
   Future<void> loginWithFederatedProvider(
       FederatedAuthProvider provider) async {
-    /// Authenticat for Google
-    ///
-    ///
-    ///
-
     switch (provider) {
       case FederatedAuthProvider.google:
-        final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-        // Obtain the auth details from the request
+        final GoogleSignInAccount? googleUser =
+            await GoogleSignIn(forceCodeForRefreshToken: true).signIn();
         final GoogleSignInAuthentication? googleAuth =
             await googleUser?.authentication;
-
-        // Create a new credential
         final credential = GoogleAuthProvider.credential(
           accessToken: googleAuth?.accessToken,
           idToken: googleAuth?.idToken,
         );
-
-        // Once signed in, return the UserCredential
         try {
-          _authInstance.signInWithCredential(credential);
+          await _authInstance.signInWithCredential(credential);
         } catch (e) {
           if (e is FirebaseAuthException) {
             AuthException customException =
                 AuthException.fromFirebaseAuthException(e);
             debugPrint('Authentication Exception: ${customException.message}');
-            // Handle the exception, for example, show an error message to the user
           } else {
             debugPrint('Unexpected error occurred: $e');
-            // Handle other types of exceptions here if needed
           }
         }
         break;
-
-      ///  Sign In with Facebook set up
       case FederatedAuthProvider.facebook:
         final LoginResult loginResult = await FacebookAuth.instance.login();
-
         final OAuthCredential facebookAuthCredential =
             FacebookAuthProvider.credential(loginResult.accessToken!.token);
-
         try {
-          _authInstance.signInWithCredential(facebookAuthCredential);
+          await _authInstance.signInWithCredential(facebookAuthCredential);
         } catch (e) {
           if (e is FirebaseAuthException) {
             AuthException customException =
                 AuthException.fromFirebaseAuthException(e);
             debugPrint('Authentication Exception: ${customException.message}');
-            // Handle the exception, for example, show an error message to the user
           } else {
             debugPrint('Unexpected error occurred: $e');
-            // Handle other types of exceptions here if needed
           }
         }
       default:
     }
-    // Trigger the authentication flow
   }
 
+  /// Logs out the currently logged-in user.
   @override
   Future<void> logout() async {
     await _authInstance.signOut();
   }
 
+  /// Registers a new user with email and password.
   @override
   Future<AuthResponse> registerWithEmailPassword(
       String email, String password) async {
     try {
-      final newUser = await _authInstance.createUserWithEmailAndPassword(
+      await _authInstance.createUserWithEmailAndPassword(
           email: email, password: password);
-
       return SuccessAuthResponse(
         message:
             'Congratulations! 🎉 You have successfully created your account.',
@@ -125,13 +109,10 @@ class AuthClient extends Auth {
         AuthException customException =
             AuthException.fromFirebaseAuthException(e);
         debugPrint('Authentication Exception: ${customException.message}');
-
         return ErrorAuthResponse(customException.message, customException.code);
-        // Handle the exception, for example, show an error message to the user
       } else {
         debugPrint('Unexpected error occurred: $e');
-        return ErrorAuthResponse("Unexpected error occurred: $e", 'error code');
-        // Handle other types of exceptions here if needed
+        return ErrorAuthResponse("Unexpected error occurred: $e", 'error');
       }
     }
   }
@@ -141,21 +122,18 @@ class AuthClient extends Auth {
     throw UnimplementedError();
   }
 
+  /// Initiates the process of resetting the user's password.
   @override
   Future<void> forgotPassword(String email) async {
     try {
-      await _authInstance.sendPasswordResetEmail(
-        email: email,
-      );
+      await _authInstance.sendPasswordResetEmail(email: email);
     } catch (e) {
       if (e is FirebaseAuthException) {
         AuthException customException =
             AuthException.fromFirebaseAuthException(e);
         debugPrint('Authentication Exception: ${customException.message}');
-        // Handle the exception, for example, show an error message to the user
       } else {
         debugPrint('Unexpected error occurred: $e');
-        // Handle other types of exceptions here if needed
       }
     }
   }

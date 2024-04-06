@@ -5,9 +5,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:free_kash/data/auth/auth.dart';
+import 'package:free_kash/data/data.dart';
+
+import 'package:free_kash/data/db/user_db_config.dart';
 import 'package:free_kash/presentation/presentations.dart';
 import 'package:free_kash/presentation/routes/routes.dart';
 import 'package:free_kash/provider/provider.dart';
+import 'package:free_kash/provider/providers/user_provider.dart';
 
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -179,9 +183,36 @@ class _TopBody extends StatelessWidget {
         return;
       }
 
+      if (context.mounted) {
+        final userId = _authClient.userID;
+        context.goNamed(RouteName.onboarding, pathParameters: {"id": userId!});
+        final wallet = Wallet(totalWithdrawal: 0, walletBalance: 0);
+
+        ref.read(userProvider)
+          ..emailAddress = emailController.text.trim()
+          ..wallet = wallet;
+
+        ref.read(loadingProvider.notifier).toggle();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: ReadexProText(
+              data: (response as SuccessAuthResponse).message!,
+              color: Palette.surface,
+              fontSize: 12.sp,
+            ),
+            backgroundColor: Palette.green,
+          ),
+        );
+      }
+
       debugPrint((response as SuccessAuthResponse).message);
 
-      ref.read(loadingProvider.notifier).toggle();
+      if (referalcodeController.text.isNotEmpty) {
+        final referaluserId = referalcodeController.text.trim();
+        ref.read(userProvider).isReferred = true;
+        final db = UserDbConfig();
+        await db.addReferalReward(referaluserId);
+      }
     }
   }
 

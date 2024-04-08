@@ -54,15 +54,17 @@ class _SignInScreenState extends State<SignInScreen> {
           centerTitle: true,
           backgroundColor: Palette.background,
         ),
-        body: Column(
-          children: [
-            TopBody(
-              emailController: _emailEditingController,
-              passwordController: _passwordEditingController,
-            ),
-            Gap(150.h),
-            const BottomBody(),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              TopBody(
+                emailController: _emailEditingController,
+                passwordController: _passwordEditingController,
+              ),
+              Gap(150.h),
+              const BottomBody(),
+            ],
+          ),
         ));
   }
 }
@@ -170,6 +172,9 @@ class TopBody extends StatelessWidget {
           //     queryParameters: {'email': _controller.text.trim()});
           // container.read(loginFormValidatorProvider.notifier).tuggleOff();
           container.read(loadingProvider.notifier).toggleOff();
+
+          context.goNamed(RouteName.dataValidator,
+              pathParameters: {'id': _client.userID!});
         }
       }
     }
@@ -177,124 +182,127 @@ class TopBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      child: Padding(
-        padding:
-            const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10).w,
-        child: SizedBox(
-          width: MediaQuery.sizeOf(context).width,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15).w,
-                child: ReadexProText(
-                  data: 'Login to your Account',
-                  textAlign: TextAlign.center,
-                  color: Palette.text,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 30.sp,
+    return SingleChildScrollView(
+      child: Form(
+        key: _formKey,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        child: Padding(
+          padding:
+              const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10).w,
+          child: SizedBox(
+            width: MediaQuery.sizeOf(context).width,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15).w,
+                  child: ReadexProText(
+                    data: 'Login to your Account',
+                    textAlign: TextAlign.center,
+                    color: Palette.text,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 30.sp,
+                  ),
                 ),
-              ),
 
-              Gap(20.h),
-              // Satart adding the text field for Email and Passowrd
+                Gap(20.h),
+                // Satart adding the text field for Email and Passowrd
 
-              // Email TextField
+                // Email TextField
 
-              AuthTextField(
-                onChanged: (value) => _validateEmail(value, context),
-                controller: emailController,
-                validator: (value) => _emailErrorText,
-              ),
-              Gap(10.h),
+                AuthTextField(
+                  onChanged: (value) => _validateEmail(value, context),
+                  controller: emailController,
+                  validator: (value) => _emailErrorText,
+                ),
+                Gap(10.h),
 
-              Consumer(
-                builder: (context, ref, child) {
-                  final obscureText = ref.watch(obscureTextProvider);
+                Consumer(
+                  builder: (context, ref, child) {
+                    final obscureText = ref.watch(obscureTextProvider);
 
-                  return AuthTextField(
-                    onChanged: (value) => _validatePassword(value, context),
-                    controller: passwordController,
-                    validator: (value) => _passwordTextError,
-                    prefixIcon: Icon(
-                      Icons.lock_outline,
-                      color: Palette.primary,
-                      size: 18.h,
-                    ),
-                    obscureText: obscureText,
-                    labelDescription: 'Password',
-                    sulfixIcon: GestureDetector(
-                      onTap: () =>
-                          ref.read(obscureTextProvider.notifier).toggle(),
-                      child: obscureText
-                          ? Icon(
-                              Icons.remove_red_eye_outlined,
-                              color: Palette.primary,
-                              size: 18.h,
-                            )
-                          : Image.asset(
-                              ImageAsset.hide,
-                              color: Palette.primary,
-                              scale: 25.h,
-                            ),
-                    ),
-                  );
-                },
-              ),
-
-              Gap(20.h),
-              SizedBox(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ReadexProText(
-                      data: 'Forgot your password?',
-                      color: Palette.text,
-                      fontSize: 14.sp,
-                    ),
-                    Gap(3.w),
-                    GestureDetector(
-                      onTap: () => context.pushNamed(RouteName.forgotPassword),
-                      child: ReadexProText(
-                        data: 'Click here',
+                    return AuthTextField(
+                      onChanged: (value) => _validatePassword(value, context),
+                      controller: passwordController,
+                      validator: (value) => _passwordTextError,
+                      prefixIcon: Icon(
+                        Icons.lock_outline,
                         color: Palette.primary,
+                        size: 18.h,
                       ),
-                    )
-                  ],
+                      obscureText: obscureText,
+                      labelDescription: 'Password',
+                      sulfixIcon: GestureDetector(
+                        onTap: () =>
+                            ref.read(obscureTextProvider.notifier).toggle(),
+                        child: obscureText
+                            ? Icon(
+                                Icons.remove_red_eye_outlined,
+                                color: Palette.primary,
+                                size: 18.h,
+                              )
+                            : Image.asset(
+                                ImageAsset.hide,
+                                color: Palette.primary,
+                                scale: 25.h,
+                              ),
+                      ),
+                    );
+                  },
                 ),
-              ),
-              Gap(30.h),
 
-              Consumer(
-                builder: (context, ref, child) {
-                  final value = ref.watch(loginFormValidatorProvider);
+                Gap(20.h),
+                SizedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ReadexProText(
+                        data: 'Forgot your password?',
+                        color: Palette.text,
+                        fontSize: 14.sp,
+                      ),
+                      Gap(3.w),
+                      GestureDetector(
+                        onTap: () =>
+                            context.pushNamed(RouteName.forgotPassword),
+                        child: ReadexProText(
+                          data: 'Click here',
+                          color: Palette.primary,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Gap(30.h),
 
-                  final loading = ref.watch(loadingProvider);
+                Consumer(
+                  builder: (context, ref, child) {
+                    final value = ref.watch(loginFormValidatorProvider);
 
-                  final isValid = (value == true);
+                    final loading = ref.watch(loadingProvider);
 
-                  final isLoading = (loading == true);
-                  return CustomButton(
-                    widget: isLoading
-                        ? CircularProgressIndicator(
-                            color: Palette.surface,
-                            strokeWidth: 2,
-                            strokeCap: StrokeCap.round,
-                          )
-                        : null,
-                    onTap: !isValid ? null : () => _submitForm(context),
-                    size: Size(MediaQuery.sizeOf(context).width, 45),
-                    color: isValid ? Palette.primary : Palette.outline,
-                    outlineColor: isValid ? Palette.primary : Palette.outline,
-                    textColor: isValid ? Palette.surface : Palette.secondary,
-                    description: 'Sign in',
-                  );
-                },
-              ),
-            ],
+                    final isValid = (value == true);
+
+                    final isLoading = (loading == true);
+                    return CustomButton(
+                      widget: isLoading
+                          ? CircularProgressIndicator(
+                              color: Palette.surface,
+                              strokeWidth: 2,
+                              strokeCap: StrokeCap.round,
+                            )
+                          : null,
+                      onTap: !isValid ? null : () => _submitForm(context),
+                      size: Size(MediaQuery.sizeOf(context).width, 45),
+                      color: isValid ? Palette.primary : Palette.outline,
+                      outlineColor: isValid ? Palette.primary : Palette.outline,
+                      textColor: isValid ? Palette.surface : Palette.secondary,
+                      description: 'Sign in',
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

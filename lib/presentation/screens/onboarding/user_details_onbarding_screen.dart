@@ -219,7 +219,7 @@ class _TopBody extends StatelessWidget {
 
                 final value = (notifier == true);
                 return CustomButton(
-                  onTap: () {
+                  onTap: () async {
                     if (_key.currentState!.validate()) {
                       // final _userData = User(
                       //   firstName: firstNameController.text.trim(),

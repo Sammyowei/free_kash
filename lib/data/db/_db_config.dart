@@ -40,8 +40,10 @@ class DbConfig extends DB {
   /// Deletes an entry from the database.
   /// [identifier]: The identifier of the entry to be deleted.
   Future<void> delete(identifier) async {
+    final db = _instance.databaseURL =
+        'https://free-kash-default-rtdb.europe-west1.firebasedatabase.app';
     final dbPath = '$dbStore/$identifier';
-    final ref = _instance.ref(dbPath);
+    final ref = _instance.refFromURL("$db/$dbPath");
     return await ref.remove();
   }
 
@@ -49,10 +51,12 @@ class DbConfig extends DB {
 
   /// Reads data from the database.
   /// [identifier]: The identifier of the data to be read.
-  Future<DataSnapshot> read(identifier) async {
+  Future<DatabaseEvent> read(identifier) async {
+    final db = _instance.databaseURL =
+        'https://free-kash-default-rtdb.europe-west1.firebasedatabase.app';
     final dbPath = '$dbStore/$identifier';
-    final ref = _instance.ref(dbPath);
-    return await ref.get();
+    final ref = _instance.refFromURL("$db/$dbPath");
+    return await ref.once();
   }
 
   @override
@@ -61,8 +65,10 @@ class DbConfig extends DB {
   /// [data]: The updated data.
   /// [identifier]: The identifier of the entry to be updated.
   Future<void> update(data, identifier) async {
+    final db = _instance.databaseURL =
+        'https://free-kash-default-rtdb.europe-west1.firebasedatabase.app';
     final dbPath = '$dbStore/$identifier';
-    final ref = _instance.ref(dbPath);
+    final ref = _instance.refFromURL("$db/$dbPath");
     return await ref.update(data);
   }
 }

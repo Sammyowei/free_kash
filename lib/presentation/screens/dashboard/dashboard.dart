@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:free_kash/data/auth/auth.dart';
+import 'package:free_kash/data/data.dart';
 import 'package:free_kash/presentation/presentations.dart';
 
 class DashBoard extends StatelessWidget {
@@ -17,11 +18,13 @@ class DashBoard extends StatelessWidget {
             ),
           ),
           TextButton(
-            onPressed: () async => await AuthClient().logout(),
+            onPressed: () async => RewardedVideoAds()
+              ..loadAds()
+              ..showAds(),
 
             // onPressed: () => debugPrint(
             //     GoRouter.of(context).routeInformationProvider.value.uri.scheme),
-            child: ReadexProText(data: 'log out'),
+            child: ReadexProText(data: 'Show ads'),
           )
         ],
       ),

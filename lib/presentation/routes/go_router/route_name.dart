@@ -24,6 +24,9 @@ class RouteName {
   /// Route Name for the confirmation screen after the password reset link has been sent.
   static const String confirmation = 'confirlmation';
 
+  /// Route Name for the data validation screen to check if the user is logged in and has its data saved in the database
+  static const String dataValidator = 'validate';
+
   /// Route name for the onboarding screen.
   static const String onboarding = 'onboarding';
 

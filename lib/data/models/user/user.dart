@@ -33,7 +33,7 @@ class User {
   String? middleName; // The middle name of the user (optional)
   String? emailAddress; // The email address of the user
   String? referralCode; // The referral code of the user
-  bool? isReferred; // Indicates whether the user was referred
+  bool isReferred; // Indicates whether the user was referred
   String? mobileNumber; // The mobile number of the user
 
   Wallet? wallet; // The wallet of the user
@@ -66,10 +66,13 @@ class User {
 
   void addReward(double amount) {
     wallet?.addToBalance(amount);
+    print(wallet?.walletBalance);
   }
 
   void addRewardToHistory(Reward reward) {
     rewardHistory.add(reward);
+
+    print(rewardHistory);
   }
 
   void withdraw(double amount) {
@@ -100,6 +103,37 @@ class User {
           .toList(),
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
+    );
+  }
+
+  factory User.fromDynamicData(Map data) {
+    var decodedValue = data;
+    final wallet = decodedValue['wallet'] as Map;
+
+    final credentials = decodedValue['credentials'] as Map;
+    return User(
+      emailAddress: decodedValue['email_address'],
+      wallet: Wallet(
+        totalWithdrawal: double.parse(wallet['total_withdrawal'].toString()),
+        walletBalance: double.parse(wallet['wallet_balance'].toString()),
+      ),
+      updatedAt: DateTime.parse(decodedValue['updated_at']),
+      credentials: Credentials(
+        accountName: credentials['account_name'],
+        accountNumber: credentials['account_number'],
+        bankName: credentials['bank_name'],
+      ),
+      referralCode: decodedValue['referral_code'],
+      isReferred: decodedValue['is_referred'],
+      createdAt: DateTime.parse(
+        decodedValue['created_at'],
+      ),
+      lastName: decodedValue['last_name'],
+      middleName: decodedValue['middle_name'],
+      mobileNumber: decodedValue['mobile_number'],
+      firstName: decodedValue['first_name'],
+      rewardHistory: decodedValue['reward_history'] ?? [],
+      withdrawalHistory: decodedValue['withdrawal_history'] ?? [],
     );
   }
 

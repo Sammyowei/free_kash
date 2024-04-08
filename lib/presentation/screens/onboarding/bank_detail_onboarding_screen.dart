@@ -6,8 +6,10 @@ import 'package:free_kash/data/auth/auth.dart';
 import 'package:free_kash/data/data.dart';
 import 'package:free_kash/data/db/user_db_config.dart';
 import 'package:free_kash/presentation/presentations.dart';
+import 'package:free_kash/presentation/routes/go_router/route_name.dart';
 import 'package:free_kash/provider/provider.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../provider/providers/user_provider.dart';
@@ -153,7 +155,7 @@ class _TopBody extends StatelessWidget {
 
   void _submit(BuildContext context) async {
     final ref = ProviderScope.containerOf(context);
-
+    ref.read(loadingProvider.notifier).toggleOn();
     final userID = AuthClient().userID;
     final user = ref.read(userProvider);
 
@@ -174,7 +176,19 @@ class _TopBody extends StatelessWidget {
 
     final res = await db.addUser(user, userID!);
 
-    print(res);
+    res;
+
+    final id = AuthClient().userID;
+
+    if (context.mounted) {
+      ref.read(loadingProvider.notifier).toggleOff();
+      context.goNamed(
+        RouteName.dashboard,
+        pathParameters: {
+          'id': id!,
+        },
+      );
+    }
   }
 
   final _key = GlobalKey<FormState>();
@@ -244,6 +258,8 @@ class _TopBody extends StatelessWidget {
               builder: (context, ref, child) {
                 // final index = ref.watch(onboardingIndexProvider);
 
+                final loadingIndicator = ref.watch(loadingProvider);
+
                 final notifier = ref.watch(bankValidatorStateNotifierProvider);
 
                 final value = (notifier == true);
@@ -254,6 +270,12 @@ class _TopBody extends StatelessWidget {
                   outlineColor: value ? Palette.primary : Palette.outline,
                   textColor: value ? Palette.surface : Palette.secondary,
                   description: 'Completed',
+                  widget: loadingIndicator
+                      ? CircularProgressIndicator(
+                          color: Palette.surface,
+                          strokeCap: StrokeCap.round,
+                          strokeWidth: 2)
+                      : null,
                 );
               },
             ),

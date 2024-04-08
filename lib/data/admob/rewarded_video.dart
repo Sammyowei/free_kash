@@ -7,7 +7,7 @@ class RewardedVideoAds {
 
   static RewardedAd? _rewardedAd;
 
-  static var adsUnitId = AdHelper.rewardedAdsUnit;
+  static var adsUnitId = AdHelper.rewardedAdsUnitTest;
 
   void loadAds() async {
     await RewardedAd.load(

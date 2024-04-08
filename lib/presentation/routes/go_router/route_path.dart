@@ -27,6 +27,9 @@ class RoutePath {
   /// Route path for the onboarding screen.
   static String onboarding = '/:id/onboarding';
 
+  /// Route path for the data validation screen to check if the user is logged in and has its data saved in the database
+  static const String dataValidator = '/:id/validate';
+
   /// Route path for the dashboard screen.
   static String dashboard = '/:id';
 

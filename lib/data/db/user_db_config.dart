@@ -56,30 +56,55 @@ class UserDbConfig extends DbConfig {
 
   Future<void> addReferalReward(String identifier) async {
     final refData = await read(identifier);
-    print("Ref data:  refData.exists");
-    if (refData.exists) {
-      final value = refData.value;
 
-      if (value == null) {
-        return;
-      }
+    if (refData.snapshot.exists) {
+      final value = refData.snapshot.value;
 
-      if (value is Map<String, dynamic>) {
-        final referee = User.fromJson(value);
+      if (value != null) {
+        final Map<dynamic, dynamic> _value =
+            Map<dynamic, dynamic>.from(value as Map<Object?, Object?>);
 
+        print('The New User instance is $_value');
+
+        print(_value.runtimeType);
+
+        // convert to map<String dynamic>
+
+        final Map<String, dynamic> decodedValue =
+            Map<String, dynamic>.from(_value);
+
+        print("new decoded Value $decodedValue");
+
+        print(decodedValue.runtimeType);
+
+        final wallet = decodedValue['wallet'] as Map;
+
+        final credentials = decodedValue['credentials'] as Map;
+
+        final referee = User.fromDynamicData(decodedValue);
+
+        print(referee.toJson());
         const rewardPrice = 100.0;
         final reward = Reward(
           amount: rewardPrice,
           createdAt: DateTime.now(),
-          description: "Refferal Earning",
+          description: "Referral Earning",
           uuid: const Uuid().v1(),
         );
 
         referee.addRewardToHistory(reward);
         referee.addReward(rewardPrice);
 
+        print('Updated data model ${referee.toJson()}');
         await update(referee.toJson(), identifier);
       }
     }
   }
+}
+
+Map<String, dynamic>? convertObjectToMap(Object? obj) {
+  if (obj is Map<String, dynamic>) {
+    return obj;
+  }
+  return null; // or handle the case where obj is not a Map
 }

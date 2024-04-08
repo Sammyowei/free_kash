@@ -2,6 +2,7 @@ import 'package:free_kash/presentation/routes/go_router/route_name.dart';
 import 'package:free_kash/presentation/routes/go_router/route_path.dart';
 import 'package:free_kash/presentation/screens/auth/forgot_password/confirmation_screen.dart';
 import 'package:free_kash/presentation/screens/screens.dart';
+import 'package:free_kash/presentation/screens/validator_screen/validator_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class NavRouter {
@@ -75,6 +76,11 @@ class NavRouter {
         builder: (context, state) {
           return const DashBoard();
         },
+      ),
+      GoRoute(
+        path: RoutePath.dataValidator,
+        name: RouteName.dataValidator,
+        builder: (context, state) => const ValidatorScreen(),
       ),
     ],
   );

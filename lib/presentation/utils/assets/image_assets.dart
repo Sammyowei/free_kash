@@ -16,4 +16,6 @@ class ImageAsset {
   static String facebook = 'facebook'.png;
 
   static String hide = 'hide_eye'.png;
+
+  static String avatar = 'avatar'.png;
 }

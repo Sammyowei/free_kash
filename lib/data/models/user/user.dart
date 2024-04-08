@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_init_to_null
+// ignore_for_file: avoid_init_to_null, no_leading_underscores_for_local_identifiers
 
 import '../models.dart'; // Importing models.dart file which contains necessary classes/interfaces
 
@@ -110,6 +110,53 @@ class User {
     var decodedValue = data;
     final wallet = decodedValue['wallet'] as Map;
 
+    final withdrawals = decodedValue['withdrawal_history'] as List<dynamic>?;
+    final rewards = decodedValue['reward_history'] as List<dynamic>?;
+
+    List<Reward> _rewardHistory = [];
+    List<Withdrawal> _withdrawalHistory = [];
+
+    if (rewards != null) {
+      if (rewards.isEmpty) {
+        _rewardHistory = [];
+      } else {
+        for (var reward in rewards) {
+          final _reward = Reward(
+              amount: double.parse(reward['amount'].toString()),
+              createdAt: DateTime.parse(reward['created_at']),
+              description: reward['description'],
+              uuid: reward['uuid']);
+
+          _rewardHistory.add(_reward);
+        }
+      }
+    }
+
+    if (withdrawals != null) {
+      if (withdrawals.isEmpty) {
+        _withdrawalHistory = [];
+      } else {
+        for (var withdwaral in withdrawals!) {
+          final _credential = withdwaral['credential'];
+          final _withdrawal = Withdrawal(
+            accountId: withdwaral['account_id'],
+            amount: double.parse(withdwaral['amount'].toString()),
+            createdAt: DateTime.parse(withdwaral['created_at']),
+            status: withdwaral['status'],
+            description: withdwaral['description'],
+            credentials: Credentials(
+              accountName: _credential['account_name'],
+              accountNumber: _credential['account_number'],
+              bankName: _credential['bank_name'],
+            ),
+            uuid: withdwaral['uuid'],
+          );
+
+          _withdrawalHistory.add(_withdrawal);
+        }
+      }
+    }
+
     final credentials = decodedValue['credentials'] as Map;
     return User(
       emailAddress: decodedValue['email_address'],
@@ -132,8 +179,8 @@ class User {
       middleName: decodedValue['middle_name'],
       mobileNumber: decodedValue['mobile_number'],
       firstName: decodedValue['first_name'],
-      rewardHistory: decodedValue['reward_history'] ?? [],
-      withdrawalHistory: decodedValue['withdrawal_history'] ?? [],
+      rewardHistory: _rewardHistory,
+      withdrawalHistory: _withdrawalHistory,
     );
   }
 

@@ -4,3 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 final onboardingIndexProvider = StateNotifierProvider<IntNotifier, int>((ref) {
   return IntNotifier();
 });
+
+final dashboardPageNotifierProvider =
+    StateNotifierProvider<IntNotifier, int>((ref) {
+  return IntNotifier();
+});

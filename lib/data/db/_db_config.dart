@@ -70,4 +70,13 @@ class DbConfig extends DB {
     final ref = _instance.refFromURL("$db/$dbPath");
     return await ref.update(data);
   }
+
+  Stream<DatabaseEvent> connectToDb(String identifier) {
+    final db = _instance.databaseURL =
+        'https://free-kash-default-rtdb.europe-west1.firebasedatabase.app';
+    final dbPath = '$dbStore/$identifier';
+    final ref = _instance.refFromURL("$db/$dbPath");
+
+    return ref.onValue;
+  }
 }

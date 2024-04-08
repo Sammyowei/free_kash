@@ -1,6 +1,8 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:free_kash/data/auth/auth.dart';
 import 'package:free_kash/data/data.dart';
 import 'package:free_kash/data/db/_db_config.dart';
 import 'package:free_kash/data/models/user/user.dart';
@@ -87,6 +89,11 @@ class UserDbConfig extends DbConfig {
         await update(referee.toJson(), identifier);
       }
     }
+  }
+
+  Stream<DatabaseEvent> openConnection() {
+    final id = AuthClient().userID;
+    return connectToDb(id!);
   }
 }
 

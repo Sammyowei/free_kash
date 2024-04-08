@@ -28,9 +28,8 @@ class DbConfig extends DB {
     final db = _instance.databaseURL =
         'https://free-kash-default-rtdb.europe-west1.firebasedatabase.app';
 
-    print(_instance.databaseURL);
     final dbPath = '$dbStore/$path';
-    print(data);
+
     final ref = _instance.refFromURL("$db/$dbPath");
     return await ref.set(data);
   }

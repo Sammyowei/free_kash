@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:free_kash/data/data.dart';
 import 'package:free_kash/data/db/_db_config.dart';
@@ -64,26 +66,13 @@ class UserDbConfig extends DbConfig {
         final Map<dynamic, dynamic> _value =
             Map<dynamic, dynamic>.from(value as Map<Object?, Object?>);
 
-        print('The New User instance is $_value');
-
-        print(_value.runtimeType);
-
         // convert to map<String dynamic>
 
         final Map<String, dynamic> decodedValue =
             Map<String, dynamic>.from(_value);
 
-        print("new decoded Value $decodedValue");
-
-        print(decodedValue.runtimeType);
-
-        final wallet = decodedValue['wallet'] as Map;
-
-        final credentials = decodedValue['credentials'] as Map;
-
         final referee = User.fromDynamicData(decodedValue);
 
-        print(referee.toJson());
         const rewardPrice = 100.0;
         final reward = Reward(
           amount: rewardPrice,
@@ -95,7 +84,6 @@ class UserDbConfig extends DbConfig {
         referee.addRewardToHistory(reward);
         referee.addReward(rewardPrice);
 
-        print('Updated data model ${referee.toJson()}');
         await update(referee.toJson(), identifier);
       }
     }

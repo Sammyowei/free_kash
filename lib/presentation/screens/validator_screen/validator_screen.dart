@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:animated_loading_indicators/animated_loading_indicators.dart';
 import 'package:flutter/material.dart';
 import 'package:free_kash/data/auth/auth.dart';

@@ -1,4 +1,3 @@
-import 'package:free_kash/data/auth/_auh_provider.dart';
 import 'package:free_kash/data/auth/auth.dart';
 
 abstract class Auth {

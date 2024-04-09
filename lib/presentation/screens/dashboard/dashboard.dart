@@ -2,10 +2,11 @@ import 'package:animated_loading_indicators/animated_loading_indicators.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:free_kash/data/auth/auth.dart';
+import 'package:free_kash/data/admob/rewarded_video.dart';
 import 'package:free_kash/data/db/user_db_config.dart';
 import 'package:free_kash/data/models/user/user.dart';
 import 'package:free_kash/presentation/routes/routes.dart';
+import 'package:free_kash/presentation/screens/dashboard/history_screen/history_screens.dart';
 import 'package:free_kash/presentation/screens/dashboard/home_screen/home_screen.dart';
 import 'package:free_kash/presentation/screens/dashboard/reward_screen/reward_screen.dart';
 import 'package:free_kash/presentation/utils/utils.dart';
@@ -60,6 +61,9 @@ class _DashBoardState extends State<DashBoard> {
             final value =
                 snapshot.data?.snapshot.value as Map<dynamic, dynamic>;
             final user = User.fromDynamicData(value);
+
+            RewardedVideoAds _rewardedAds = RewardedVideoAds(user: user);
+            _rewardedAds.loadAds(context);
             return Consumer(
               builder: (context, ref, child) {
                 final index = ref.watch(dashboardPageNotifierProvider);
@@ -67,11 +71,17 @@ class _DashBoardState extends State<DashBoard> {
                   HomeScreen(
                     user: user,
                   ),
-                  RewardScreen(user: user),
-                  HomeScreen(
+                  RewardScreen(
+                    user: user,
+                    rewardedAds: _rewardedAds,
+                  ),
+                  HistoryScreen(
                     user: user,
                   ),
-                  RewardScreen(user: user)
+                  RewardScreen(
+                    user: user,
+                    rewardedAds: _rewardedAds,
+                  )
                 ];
                 return _screens[index];
               },

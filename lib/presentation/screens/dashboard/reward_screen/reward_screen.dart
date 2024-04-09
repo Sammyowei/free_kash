@@ -8,21 +8,20 @@ import 'package:free_kash/presentation/presentations.dart';
 import 'package:gap/gap.dart';
 
 class RewardScreen extends StatefulWidget {
-  const RewardScreen({super.key, required this.user});
+  const RewardScreen(
+      {super.key, required this.user, required this.rewardedAds});
 
   final User user;
+
+  final RewardedVideoAds rewardedAds;
 
   @override
   State<RewardScreen> createState() => _RewardScreenState();
 }
 
 class _RewardScreenState extends State<RewardScreen> {
-  late RewardedVideoAds _rewardedAds;
-
   @override
   void initState() {
-    _rewardedAds = RewardedVideoAds(user: widget.user);
-    _rewardedAds.loadAds(context);
     super.initState();
   }
 
@@ -34,7 +33,7 @@ class _RewardScreenState extends State<RewardScreen> {
         child: Column(
           children: [
             _TopBody(
-              rewardedVideoAds: _rewardedAds,
+              rewardedVideoAds: widget.rewardedAds,
             ),
           ],
         ),

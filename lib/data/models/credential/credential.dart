@@ -2,16 +2,16 @@ class Credentials {
   // A class representing credentials for a bank account
 
   // Constructor for Credentials class
-  const Credentials({
+  Credentials({
     required this.accountName, // The name associated with the bank account
     required this.accountNumber, // The account number of the bank account
     required this.bankName, // The name of the bank
   });
 
   // Properties of Credentials class
-  final String accountNumber; // The account number of the bank account
-  final String accountName; // The name associated with the bank account
-  final String bankName; // The name of the bank
+  String accountNumber; // The account number of the bank account
+  String accountName; // The name associated with the bank account
+  String bankName; // The name of the bank
 
   // Factory method to create Credentials object from JSON data
   factory Credentials.fromJson(Map<String, dynamic> json) {

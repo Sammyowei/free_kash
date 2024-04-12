@@ -1,6 +1,12 @@
+import 'package:free_kash/data/models/user/user.dart';
 import 'package:free_kash/presentation/routes/go_router/route_name.dart';
 import 'package:free_kash/presentation/routes/go_router/route_path.dart';
 import 'package:free_kash/presentation/screens/auth/forgot_password/confirmation_screen.dart';
+import 'package:free_kash/presentation/screens/dashboard/contact_support_screen/contact_support_screen.dart';
+import 'package:free_kash/presentation/screens/dashboard/edit_bank_detail_screen/edit_bank_detail_screen.dart';
+import 'package:free_kash/presentation/screens/dashboard/edit_profile_screen/edit_profile_screen.dart';
+import 'package:free_kash/presentation/screens/dashboard/referral_screen/referral_screen.dart';
+import 'package:free_kash/presentation/screens/dashboard/withdrawal_screen/withdrawal_screen.dart';
 import 'package:free_kash/presentation/screens/screens.dart';
 import 'package:free_kash/presentation/screens/validator_screen/validator_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -82,6 +88,55 @@ class NavRouter {
         name: RouteName.dataValidator,
         builder: (context, state) => const ValidatorScreen(),
       ),
+      GoRoute(
+        path: RoutePath.profile,
+        name: RouteName.profile,
+        builder: (context, state) {
+          final data = state.extra as Map<dynamic, dynamic>;
+
+          final user = User.fromDynamicData(data);
+
+          return EditProfile(
+            user: user,
+          );
+        },
+      ),
+      GoRoute(
+        path: RoutePath.bank,
+        name: RouteName.bank,
+        builder: (context, state) {
+          final data = state.extra as Map<dynamic, dynamic>;
+
+          final user = User.fromDynamicData(data);
+
+          return EditBankDetails(user: user);
+        },
+      ),
+      GoRoute(
+        path: RoutePath.withdrawal,
+        name: RouteName.withdrawal,
+        builder: (context, state) {
+          final data = state.extra as Map<dynamic, dynamic>;
+
+          final user = User.fromDynamicData(data);
+          return WithdrawalScreen(user: user);
+        },
+      ),
+      GoRoute(
+        path: RoutePath.contactSupport,
+        name: RouteName.contactSupport,
+        builder: (context, state) => const ContactSupportScreen(),
+      ),
+      GoRoute(
+        path: RoutePath.referral,
+        name: RouteName.referral,
+        builder: (context, state) {
+          final data = state.extra as Map<dynamic, dynamic>;
+
+          final user = User.fromDynamicData(data);
+          return ReferalScreen(user: user);
+        },
+      )
     ],
   );
 }

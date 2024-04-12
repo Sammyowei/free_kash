@@ -186,7 +186,7 @@ class _TopBody extends StatelessWidget {
       if (context.mounted) {
         final userId = _authClient.userID;
         context.goNamed(RouteName.onboarding, pathParameters: {"id": userId!});
-        final wallet = Wallet(totalWithdrawal: 0, walletBalance: 0);
+        final wallet = Wallet(walletBalance: 0);
 
         ref.read(userProvider)
           ..emailAddress = emailController.text.trim()

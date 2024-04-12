@@ -40,10 +40,10 @@ class RouteName {
   static const String bank = 'bank';
 
   /// Route name for the wallet screen.
-  static const String wallet = 'wallet';
+  static const String withdrawal = 'withdrawal';
 
   /// Route name for the earn screen.
-  static const String earn = 'earn';
+  static const String contactSupport = 'contact-support';
 
   /// Route name for the settings screen.
   static const String settings = 'settings';

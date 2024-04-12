@@ -2,6 +2,7 @@ const _imagePath = 'assets/images';
 
 extension ImageExtension on String {
   String get png => '$_imagePath/$this.png';
+  String get jpg => '$_imagePath/$this.jpg';
 }
 
 class ImageAsset {
@@ -18,4 +19,6 @@ class ImageAsset {
   static String hide = 'hide_eye'.png;
 
   static String avatar = 'avatar'.png;
+
+  static String referal = 'referral'.png;
 }

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:free_kash/data/models/user/user.dart';
 import 'package:free_kash/presentation/presentations.dart';
 import 'package:free_kash/presentation/screens/dashboard/home_screen/home_screen.dart';
-import 'package:free_kash/presentation/utils/utils.dart';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -41,7 +41,18 @@ class _HistoryScreenState extends State<HistoryScreen>
       child: SafeArea(child: Consumer(
         builder: (context, ref, child) {
           return Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: ReadexProText(
+                  data: 'History',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22.sp,
+                  color: Palette.text,
+                ),
+              ),
               TabBar(
                 controller: _controller,
                 labelColor: Palette.primary,
@@ -57,7 +68,7 @@ class _HistoryScreenState extends State<HistoryScreen>
                 ],
               ),
               SizedBox(
-                height: MediaQuery.sizeOf(context).height * 0.82,
+                height: MediaQuery.sizeOf(context).height * 0.78,
                 width: MediaQuery.sizeOf(context).width,
                 child: TabBarView(
                   controller: _controller,
@@ -87,13 +98,14 @@ class TotalEarning extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (rewards.isNotEmpty) {
+      final reversedRewards = rewards.reversed.toList();
       return ListView.builder(
         itemCount: rewards.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(bottom: 8, left: 15, right: 15).w,
             child: RewardContainer(
-              reward: rewards[index],
+              reward: reversedRewards[index],
             ),
           );
         },
@@ -175,7 +187,7 @@ class WithdrawalContainer extends StatelessWidget {
             children: [
               ReadexProText(
                 data: withdrawal.description,
-                fontSize: 16.sp,
+                fontSize: 14.sp,
                 color: Palette.text,
               ),
               ReadexProText(
@@ -195,7 +207,7 @@ class WithdrawalContainer extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
               ReadexProText(
-                data: '+${withdrawal.status}',
+                data: withdrawal.status,
                 fontSize: 14.sp,
                 color: Palette.green,
                 fontWeight: FontWeight.w500,

@@ -13,6 +13,8 @@ class AuthClient extends Auth {
 
   String? get userID => _authInstance.currentUser?.uid;
 
+  FirebaseAuth get instance => _authInstance;
+
   /// Checks if a user is currently logged in.
   @override
   Future<bool> isLoggedIn() async {

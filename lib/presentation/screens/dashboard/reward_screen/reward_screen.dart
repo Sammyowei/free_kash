@@ -78,7 +78,7 @@ class _TopBody extends StatelessWidget {
               color: Palette.primary,
               outlineColor: Palette.primary,
               textColor: Palette.surface,
-              description: 'Watch Ads Now!',
+              description: 'Click to earn now!',
             ),
           ],
         )

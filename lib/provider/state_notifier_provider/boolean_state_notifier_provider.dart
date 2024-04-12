@@ -43,3 +43,13 @@ final bankValidatorStateNotifierProvider =
     StateNotifierProvider<BooleanStateNotifier, bool>((ref) {
   return BooleanStateNotifier();
 });
+
+final editProfileStateProvider =
+    StateNotifierProvider<BooleanStateNotifier, bool>((ref) {
+  return BooleanStateNotifier();
+});
+
+final withdrawalFormVAlidatorProvider =
+    StateNotifierProvider<BooleanStateNotifier, bool>((ref) {
+  return BooleanStateNotifier();
+});

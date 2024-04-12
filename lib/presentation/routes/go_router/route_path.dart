@@ -40,16 +40,16 @@ class RoutePath {
   static String bank = '/:id/profile/bank';
 
   /// Route path for the wallet screen.
-  static String wallet = '/:id/wallet';
+  static String withdrawal = '/:id/withdrawal';
 
   /// Route path for the earn screen.
-  static String earn = '/:id/earn';
+  static String contactSupport = '/:id/contact-support';
 
   /// Route path for the settings screen.
   static String settings = '/:id/settings';
 
   /// Route path for the referral screen.
-  static String referral = ':id/referral';
+  static String referral = '/:id/referral';
 
   /// Route path for changing password within the profile settings.
   static String changePassword = '/:id/profile/updatePassword';

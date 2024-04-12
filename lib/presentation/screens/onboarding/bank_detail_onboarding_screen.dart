@@ -160,7 +160,7 @@ class _TopBody extends StatelessWidget {
     final user = ref.read(userProvider);
 
     final credential = Credentials(
-        accountName: bankNameController.text.trim(),
+        accountName: accountNameController.text.trim(),
         accountNumber: accountNumberController.text.trim(),
         bankName: bankNameController.text.trim());
 

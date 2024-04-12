@@ -245,10 +245,12 @@ class _BottomBody extends StatelessWidget {
         child: ListView.builder(
             itemCount: rewards.length > 5 ? 5 : rewards.length,
             itemBuilder: (context, index) {
+              final reversedList = rewards.reversed.toList();
+
               return Padding(
                 padding: const EdgeInsets.only(bottom: 8).w,
                 child: RewardContainer(
-                  reward: rewards[index],
+                  reward: reversedList[index],
                 ),
               );
             }),

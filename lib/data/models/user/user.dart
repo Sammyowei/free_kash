@@ -79,6 +79,10 @@ class User {
     wallet?.withdrawFromBalance(amount);
   }
 
+  void addToWithdrawalHistory(Withdrawal withdrawal) {
+    withdrawalHistory.add(withdrawal);
+  }
+
   // Factory method to create a User object from JSON data
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -161,7 +165,6 @@ class User {
     return User(
       emailAddress: decodedValue['email_address'],
       wallet: Wallet(
-        totalWithdrawal: double.parse(wallet['total_withdrawal'].toString()),
         walletBalance: double.parse(wallet['wallet_balance'].toString()),
       ),
       updatedAt: DateTime.parse(decodedValue['updated_at']),

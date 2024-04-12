@@ -8,6 +8,7 @@ import 'package:free_kash/data/models/user/user.dart';
 import 'package:free_kash/presentation/routes/routes.dart';
 import 'package:free_kash/presentation/screens/dashboard/history_screen/history_screens.dart';
 import 'package:free_kash/presentation/screens/dashboard/home_screen/home_screen.dart';
+import 'package:free_kash/presentation/screens/dashboard/profile_screen/profile_screen.dart';
 import 'package:free_kash/presentation/screens/dashboard/reward_screen/reward_screen.dart';
 import 'package:free_kash/presentation/utils/utils.dart';
 import 'package:free_kash/presentation/widgets/widgets.dart';
@@ -78,10 +79,7 @@ class _DashBoardState extends State<DashBoard> {
                   HistoryScreen(
                     user: user,
                   ),
-                  RewardScreen(
-                    user: user,
-                    rewardedAds: _rewardedAds,
-                  )
+                  ProfileScreen(user: user),
                 ];
                 return _screens[index];
               },

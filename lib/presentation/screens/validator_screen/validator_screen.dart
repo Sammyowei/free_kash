@@ -22,12 +22,12 @@ class _ValidatorScreenState extends State<ValidatorScreen> {
 
     final data = await DbConfig(dbStore: 'users').read(id);
 
-    print("data exist: ${data.snapshot.exists}");
+    debugPrint("data exist: ${data.snapshot.exists}");
     if (data.snapshot.exists) {
-      print("data exist");
+      debugPrint("data exist");
       context.goNamed(RouteName.dashboard, pathParameters: {'id': id!});
     } else {
-      print("data does not exist");
+      debugPrint("data does not exist");
       context.goNamed(RouteName.onboarding, pathParameters: {
         'id': id!,
       });
@@ -47,7 +47,7 @@ class _ValidatorScreenState extends State<ValidatorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('on This screen');
+    debugPrint('on This screen');
     return Scaffold(
       body: Center(
         child: CircleAnimation(

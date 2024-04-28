@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:free_kash/data/auth/auth.dart';
 
 abstract class Auth {
@@ -11,7 +12,8 @@ abstract class Auth {
   Future<void> registerWithFederatedProvider(String provider);
 
   // Method to log in an existing user with federated providers (e.g., Google, Facebook)
-  Future<void> loginWithFederatedProvider(FederatedAuthProvider provider);
+  Future<void> loginWithFederatedProvider(
+      FederatedAuthProvider provider, BuildContext context);
 
   // Method to log out the current user
   Future<void> logout();

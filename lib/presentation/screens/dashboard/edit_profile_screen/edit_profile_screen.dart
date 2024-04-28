@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -135,8 +137,6 @@ class _EditProfileState extends State<EditProfile> {
                   onTap: editProfileNotifier == false
                       ? null
                       : () async {
-                          // TODO: Check if the email Changed then update it in the Auth Server.
-
                           ref.read(loadingProvider.notifier).toggleOn();
                           final _authClient = AuthClient();
                           if (widget.user.emailAddress !=
@@ -147,7 +147,7 @@ class _EditProfileState extends State<EditProfile> {
                                 _emailController.text.trim(),
                               );
                             } on FirebaseAuthException catch (e) {
-                              print("AN ERROR OCCURED HERE ${e.message}");
+                              debugPrint("AN ERROR OCCURED HERE ${e.message}");
                               ref.read(loadingProvider.notifier).toggleOff();
                               ref
                                   .read(editProfileStateProvider.notifier)

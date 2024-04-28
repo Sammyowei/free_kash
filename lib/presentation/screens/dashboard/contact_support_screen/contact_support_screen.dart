@@ -23,15 +23,15 @@ class _ContactSupportScreenState extends State<ContactSupportScreen> {
       ..setNavigationDelegate(
         NavigationDelegate(
           onProgress: (int progress) {
-            print('Started Loading');
+            debugPrint('Started Loading');
 
             ref.read(loadingProvider.notifier).toggleOn();
           },
           onPageStarted: (String url) {
-            print('Page Started');
+            debugPrint('Page Started');
           },
           onPageFinished: (String url) {
-            print('Page Finished');
+            debugPrint('Page Finished');
 
             ref.read(loadingProvider.notifier).toggleOff();
           },

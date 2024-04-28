@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:free_kash/data/auth/auth_client.dart';
@@ -29,7 +31,7 @@ class _EditBankDetailsState extends State<EditBankDetails> {
   void initState() {
     final user = widget.user;
 
-    print(user.credentials?.toJson());
+    debugPrint(user.credentials?.toJson().toString());
     _accountNameController = TextEditingController.fromValue(
       TextEditingValue(text: user.credentials?.accountName ?? ''),
     );
@@ -112,7 +114,6 @@ class _EditBankDetailsState extends State<EditBankDetails> {
                   onTap: editProfileNotifier == false
                       ? null
                       : () async {
-                          // TODO: Check if the email Changed then update it in the Auth Server.
                           final AuthClient _authClient = AuthClient();
                           ref.read(loadingProvider.notifier).toggleOn();
 
@@ -126,7 +127,7 @@ class _EditBankDetailsState extends State<EditBankDetails> {
                                 _accountNumberController.text.trim()
                             ..bankName = _bankNameController.text.trim();
 
-                          print(user.toJson());
+                          debugPrint(user.toJson().toString());
                           final _dbConfig = DbConfig(dbStore: 'users');
 
                           await _dbConfig.update(

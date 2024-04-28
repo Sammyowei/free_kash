@@ -1,4 +1,4 @@
-// ignore_for_file: unused_element, prefer_const_constructors_in_immutables
+// ignore_for_file: unused_element, prefer_const_constructors_in_immutables, no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -262,44 +262,42 @@ class _CustomBotton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 10,
-              right: 10,
-              top: 10,
-              bottom: 10,
-            ).w,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ReadexProText(
-                  data: label,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w300,
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 10,
+            right: 10,
+            top: 10,
+            bottom: 10,
+          ).w,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ReadexProText(
+                data: label,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w300,
+                color: isRed ? Palette.red : Palette.text,
+              ),
+              GestureDetector(
+                onTap: onTap,
+                child: Icon(
+                  Icons.navigate_next,
+                  size: 30.h,
                   color: isRed ? Palette.red : Palette.text,
                 ),
-                GestureDetector(
-                  onTap: onTap,
-                  child: Icon(
-                    Icons.navigate_next,
-                    size: 30.h,
-                    color: isRed ? Palette.red : Palette.text,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-          showDivider
-              ? Divider(
-                  color: Palette.outline,
-                )
-              : const SizedBox(),
-        ],
-      ),
+        ),
+        showDivider
+            ? Divider(
+                color: Palette.outline,
+              )
+            : const SizedBox(),
+      ],
     );
   }
 }

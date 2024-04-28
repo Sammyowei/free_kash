@@ -10,6 +10,8 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../data/auth/auth.dart';
+
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
 
@@ -218,12 +220,16 @@ class _BottomBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SocialSignInButton(
+              onTap: () async => await AuthClient().loginWithFederatedProvider(
+                  FederatedAuthProvider.facebook, context),
               radius: 10,
               size: const Size(48, 48),
               imagePath: ImageAsset.facebook,
             ),
             Gap(30.w),
             SocialSignInButton(
+              onTap: () async => await AuthClient().loginWithFederatedProvider(
+                  FederatedAuthProvider.google, context),
               radius: 10,
               size: const Size(48, 48),
               imagePath: ImageAsset.google,

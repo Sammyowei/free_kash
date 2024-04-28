@@ -68,8 +68,8 @@ class BodyWithButton extends StatelessWidget {
               imagePath: ImageAsset.facebook,
               description: 'Continue with Facebook',
               onTap: () async {
-                await AuthClient()
-                    .loginWithFederatedProvider(FederatedAuthProvider.facebook);
+                await AuthClient().loginWithFederatedProvider(
+                    FederatedAuthProvider.facebook, context);
                 debugPrint('Hello World');
               },
             ),
@@ -80,8 +80,8 @@ class BodyWithButton extends StatelessWidget {
               size: Size(MediaQuery.sizeOf(context).width, 55),
               description: 'Continue with Google',
               onTap: () async {
-                await AuthClient()
-                    .loginWithFederatedProvider(FederatedAuthProvider.google);
+                await AuthClient().loginWithFederatedProvider(
+                    FederatedAuthProvider.google, context);
                 debugPrint('Hello World');
               },
             ),
@@ -91,13 +91,19 @@ class BodyWithButton extends StatelessWidget {
                 : SocialSignInButton(
                     radius: 10,
                     imagePath: ImageAsset.apple,
-                    size: Size(MediaQuery.sizeOf(context).width, 55),
+                    size: Size(
+                      MediaQuery.sizeOf(context).width,
+                      55,
+                    ),
                     description: 'Continue with Apple',
                   ),
             Gap(10.h),
             CustomButton(
               onTap: () => context.pushNamed(RouteName.signup),
-              size: Size(MediaQuery.sizeOf(context).width, 50),
+              size: Size(
+                MediaQuery.sizeOf(context).width,
+                50,
+              ),
               description: 'Sign up with email',
               color: Palette.primary,
               outlineColor: Palette.primary,

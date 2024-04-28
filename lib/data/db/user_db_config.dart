@@ -2,6 +2,7 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
 import 'package:free_kash/data/auth/auth.dart';
 import 'package:free_kash/data/data.dart';
 import 'package:free_kash/data/db/_db_config.dart';
@@ -23,7 +24,7 @@ class UserDbConfig extends DbConfig {
       return {"message": 'Data added successfully.'}; // Return success message
     } on FirebaseException catch (error) {
       // If an error occurs during Firebase operation, catch and handle it
-      print(
+      debugPrint(
           'Error occurred while adding user: ${error.message}'); // Log the error message for debugging
       return {
         "error": 'An error occurred while adding user.'
@@ -46,7 +47,7 @@ class UserDbConfig extends DbConfig {
       }; // Return success message
     } on FirebaseException catch (error) {
       // If an error occurs during Firebase operation, catch and handle it
-      print(
+      debugPrint(
           'Error occurred while updating user data: ${error.message}'); // Log the error message for debugging
       return {
         "error": 'An error occurred while updating user data.'

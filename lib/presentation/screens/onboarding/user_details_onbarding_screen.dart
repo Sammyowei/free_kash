@@ -243,7 +243,7 @@ class _TopBody extends StatelessWidget {
 
                       ref.read(onboardingIndexProvider.notifier).foward();
 
-                      print(ref.read(userProvider).toJson());
+                      debugPrint(ref.read(userProvider).toJson().toString());
                     }
                   },
                   size: Size(MediaQuery.sizeOf(context).width, 45),

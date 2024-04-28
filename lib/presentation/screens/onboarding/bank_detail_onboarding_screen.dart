@@ -82,7 +82,6 @@ class _TopBody extends StatelessWidget {
   final TextEditingController accountNameController;
 
   _TopBody({
-    super.key,
     required this.bankNameController,
     required this.accountNumberController,
     required this.accountNameController,
@@ -168,7 +167,7 @@ class _TopBody extends StatelessWidget {
       ..addCredentials(credential)
       ..referralCode = userID;
 
-    print(ref.read(userProvider).toJson());
+    debugPrint(ref.read(userProvider).toJson().toString());
 
     // ref.read(onboardingIndexProvider.notifier).back();
 

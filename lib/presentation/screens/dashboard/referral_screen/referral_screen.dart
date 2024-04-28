@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:free_kash/data/models/user/user.dart';
@@ -40,7 +42,7 @@ class _ReferalScreenState extends State<ReferalScreen> {
 }
 
 class _TopContainer extends StatelessWidget {
-  const _TopContainer({super.key});
+  const _TopContainer();
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +77,7 @@ class _TopContainer extends StatelessWidget {
 class _Body extends StatelessWidget {
   final User user;
 
-  _Body({super.key, required this.user});
+  const _Body({required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -237,11 +239,11 @@ class _HowDesc extends StatelessWidget {
 
   final String description;
 
-  const _HowDesc({super.key, this.index = 1, this.description = 'Hello world'});
+  const _HowDesc({this.index = 1, this.description = 'Hello world'});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.sizeOf(context).width,
       height: 45.h,
       child: Row(
@@ -268,8 +270,7 @@ class _HowDesc extends StatelessWidget {
 }
 
 class _CustomContainer extends StatelessWidget {
-  const _CustomContainer(
-      {super.key, required this.size, this.child, this.radius = 15});
+  const _CustomContainer({required this.size, this.child, this.radius = 15});
 
   final Size size;
 

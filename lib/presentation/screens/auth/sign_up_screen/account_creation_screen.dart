@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, no_leading_underscores_for_local_identifiers
 
 import 'dart:io';
 
@@ -149,7 +149,7 @@ class _TopBody extends StatelessWidget {
     return passwordRegex.hasMatch(password);
   }
 
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   void _submitForm(BuildContext context) async {
     final ref = ProviderScope.containerOf(context);
@@ -389,8 +389,7 @@ class _BottomBody extends StatelessWidget {
           children: [
             SocialSignInButton(
               onTap: () async => await AuthClient().loginWithFederatedProvider(
-                FederatedAuthProvider.facebook,
-              ),
+                  FederatedAuthProvider.facebook, context),
               radius: 10,
               size: const Size(48, 48),
               imagePath: ImageAsset.facebook,
@@ -412,8 +411,7 @@ class _BottomBody extends StatelessWidget {
             SocialSignInButton(
               onTap: () async {
                 await AuthClient().loginWithFederatedProvider(
-                  FederatedAuthProvider.google,
-                );
+                    FederatedAuthProvider.google, context);
               },
               radius: 10,
               size: const Size(48, 48),

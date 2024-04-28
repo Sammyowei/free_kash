@@ -4,6 +4,8 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:free_kash/data/auth/_auh_provider.dart';
 import 'package:free_kash/data/auth/_auth.dart';
 import 'package:free_kash/data/auth/_exception.dart';
+import 'package:free_kash/presentation/routes/routes.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '_auth_response.dart';
 
@@ -47,7 +49,7 @@ class AuthClient extends Auth {
   /// Logs in a user with a federated provider (e.g., Google, Facebook).
   @override
   Future<void> loginWithFederatedProvider(
-      FederatedAuthProvider provider) async {
+      FederatedAuthProvider provider, BuildContext context) async {
     switch (provider) {
       case FederatedAuthProvider.google:
         final GoogleSignInAccount? googleUser =
@@ -59,7 +61,13 @@ class AuthClient extends Auth {
           idToken: googleAuth?.idToken,
         );
         try {
-          await _authInstance.signInWithCredential(credential);
+          final credentials =
+              await _authInstance.signInWithCredential(credential);
+
+          if (context.mounted) {
+            context.goNamed(RouteName.dataValidator,
+                pathParameters: {'id': credentials.user!.uid});
+          }
         } catch (e) {
           if (e is FirebaseAuthException) {
             AuthException customException =
@@ -75,7 +83,13 @@ class AuthClient extends Auth {
         final OAuthCredential facebookAuthCredential =
             FacebookAuthProvider.credential(loginResult.accessToken!.token);
         try {
-          await _authInstance.signInWithCredential(facebookAuthCredential);
+          final credentials =
+              await _authInstance.signInWithCredential(facebookAuthCredential);
+
+          if (context.mounted) {
+            context.goNamed(RouteName.dataValidator,
+                pathParameters: {'id': credentials.user!.uid});
+          }
         } catch (e) {
           if (e is FirebaseAuthException) {
             AuthException customException =

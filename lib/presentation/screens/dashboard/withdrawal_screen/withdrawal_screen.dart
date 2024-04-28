@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:free_kash/data/auth/auth.dart';
@@ -5,7 +7,6 @@ import 'package:free_kash/data/data.dart';
 import 'package:free_kash/data/db/_db_config.dart';
 import 'package:free_kash/data/models/user/user.dart';
 import 'package:free_kash/presentation/presentations.dart';
-import 'package:free_kash/presentation/utils/color_palette/color_palette.dart';
 import 'package:free_kash/provider/provider.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';

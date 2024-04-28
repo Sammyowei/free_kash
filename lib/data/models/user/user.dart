@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_init_to_null, no_leading_underscores_for_local_identifiers
 
+import 'package:flutter/material.dart';
+
 import '../models.dart'; // Importing models.dart file which contains necessary classes/interfaces
 
 class User {
@@ -66,13 +68,13 @@ class User {
 
   void addReward(double amount) {
     wallet?.addToBalance(amount);
-    print(wallet?.walletBalance);
+    debugPrint(wallet?.walletBalance.toString());
   }
 
   void addRewardToHistory(Reward reward) {
     rewardHistory.add(reward);
 
-    print(rewardHistory);
+    debugPrint(rewardHistory.toString());
   }
 
   void withdraw(double amount) {
@@ -140,7 +142,7 @@ class User {
       if (withdrawals.isEmpty) {
         _withdrawalHistory = [];
       } else {
-        for (var withdwaral in withdrawals!) {
+        for (var withdwaral in withdrawals) {
           final _credential = withdwaral['credential'];
           final _withdrawal = Withdrawal(
             accountId: withdwaral['account_id'],
